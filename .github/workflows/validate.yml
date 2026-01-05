@@ -28,9 +28,3 @@ jobs:
 
       - name: Run schema validation
         run: npm run validate
-
-      - name: Report validation results
-        if: failure()
-        run: |
-          echo "::error::Schema validation failed. Please check the logs above for details."
-          exit 1
