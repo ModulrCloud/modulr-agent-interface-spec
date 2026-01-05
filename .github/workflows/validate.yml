@@ -10,7 +10,7 @@ on:
 
 jobs:
   validate:
-    name: Validate Examples Against Schemas
+    name: Validation
     runs-on: ubuntu-latest
 
     steps:
