@@ -1,0 +1,45 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/signalling/v0/disconnected.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Signalling Disconnected Message",
+  "description": "Indicates that a WebRTC connection has been lost or closed (v0.x).",
+  "type": "object",
+
+  "allOf": [
+    {
+      "$ref": "../../common/v0/envelope.json"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "signalling.disconnected"
+        },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "connectionId": {
+              "type": "string",
+              "description": "Unique identifier for the connection session that was lost."
+            },
+            "reason": {
+              "type": "string",
+              "enum": ["closed", "failed", "timeout"],
+              "description": "The reason for disconnection."
+            },
+            "iceConnectionState": {
+              "type": "string",
+              "description": "The ICE connection state at time of disconnection."
+            },
+            "details": {
+              "type": "object",
+              "description": "Optional additional details about the disconnection."
+            }
+          },
+          "required": ["connectionId", "reason"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["payload"]
+    }
+  ]
+}

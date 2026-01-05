@@ -1,0 +1,20 @@
+{
+  "type": "signalling.error",
+  "version": "0.0",
+  "id": "f2a3b4c5-6d7e-8f9a-0b1c-2d3e4f5a6b7c",
+  "correlationId": "session-1234",
+  "timestamp": "2026-01-05T15:05:00Z",
+  "payload": {
+    "code": "CONNECTION_FAILED",
+    "message": "WebRTC connection failed to establish",
+    "details": {
+      "reason": "ice-connection-failed",
+      "iceState": "failed",
+      "lastError": "No valid ICE candidates"
+    }
+  },
+  "meta": {
+    "source": "signalling-server",
+    "severity": "error"
+  }
+}

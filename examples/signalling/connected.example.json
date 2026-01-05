@@ -1,0 +1,14 @@
+{
+  "type": "signalling.connected",
+  "version": "0.0",
+  "id": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+  "timestamp": "2026-01-05T15:10:00Z",
+  "payload": {
+    "connectionId": "b7c3c1a2-5f1e-4c44-9f42-91b9d65f4c2d",
+    "iceConnectionState": "connected",
+    "dataChannelState": "open"
+  },
+  "meta": {
+    "source": "agent-service"
+  }
+}

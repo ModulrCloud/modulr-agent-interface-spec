@@ -1,0 +1,18 @@
+{
+  "type": "agent.error",
+  "version": "0.0",
+  "id": "e1f2a3b4-5c6d-7e8f-9a0b-1c2d3e4f5a6b",
+  "correlationId": "control-1234",
+  "timestamp": "2026-01-05T15:00:00Z",
+  "payload": {
+    "code": "MOVEMENT_FAILED",
+    "message": "Agent movement command failed: obstacle detected",
+    "details": {
+      "obstacleType": "wall"
+    }
+  },
+  "meta": {
+    "source": "agent-service",
+    "severity": "warning"
+  }
+}

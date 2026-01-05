@@ -1,0 +1,15 @@
+{
+  "type": "signalling.answer",
+  "version": "0.0",
+  "id": "d8f9a0b1-2c3d-4e5f-6a7b-8c9d0e1f2a3b",
+  "correlationId": "session-1234",
+  "timestamp": "2026-01-05T14:32:15Z",
+  "payload": {
+    "connectionId": "b7c3c1a2-5f1e-4c44-9f42-91b9d65f4c2d",
+    "sdpType": "answer",
+    "sdp": "v=0\r\no=- 46117328 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\nm=video 9 UDP/TLS/RTP/SAVPF 96\r\na=mid:0\r\n..."
+  },
+  "meta": {
+    "source": "agent-service"
+  }
+}

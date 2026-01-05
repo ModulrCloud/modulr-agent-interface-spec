@@ -1,0 +1,19 @@
+{
+  "type": "signalling.disconnected",
+  "version": "0.0",
+  "id": "d4e5f6a7-b8c9-0d1e-2f3a-4b5c6d7e8f9a",
+  "correlationId": "session-5678",
+  "timestamp": "2026-01-05T15:25:00Z",
+  "payload": {
+    "connectionId": "b7c3c1a2-5f1e-4c44-9f42-91b9d65f4c2d",
+    "reason": "timeout",
+    "iceConnectionState": "disconnected",
+    "details": {
+      "durationSeconds": "900",
+      "lastActivity": "2026-01-05T15:10:00Z"
+    }
+  },
+  "meta": {
+    "source": "web-client"
+  }
+}

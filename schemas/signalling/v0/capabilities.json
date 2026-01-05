@@ -1,0 +1,34 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/signalling/v0/capabilities.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SignallingCapabilitiesMessage",
+  "description": "Declares WebRTC capabilities and supported features (v0.x)",
+  "allOf": [
+    {
+      "$ref": "../../common/v0/envelope.json"
+    },
+    {
+      "required": ["payload"],
+      "properties": {
+        "type": {
+          "const": "signalling.capabilities"
+        },
+        "payload": {
+          "type": "object",
+          "required": ["versions"],
+          "properties": {
+            "versions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              },
+              "description": "List of supported protocol versions (MAJOR.MINOR format)"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}

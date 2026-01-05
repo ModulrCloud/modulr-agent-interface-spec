@@ -1,0 +1,17 @@
+{
+  "type": "signalling.ice_candidate",
+  "version": "0.0",
+  "id": "e9f0a1b2-3c4d-5e6f-7a8b-9c0d1e2f3a4b",
+  "correlationId": "session-1234",
+  "timestamp": "2026-01-05T14:32:20Z",
+  "payload": {
+    "connectionId": "b7c3c1a2-5f1e-4c44-9f42-91b9d65f4c2d",
+    "candidate": "candidate:1 1 UDP 2130706431 192.168.1.100 54321 typ host",
+    "sdpMid": "0",
+    "sdpMLineIndex": 0,
+    "usernameFragment": "abc123"
+  },
+  "meta": {
+    "source": "web-client"
+  }
+}

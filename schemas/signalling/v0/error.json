@@ -1,0 +1,57 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/signalling/v0/error.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SignallingErrorMessage",
+  "description": "Signalling error message (v0.x)",
+  "allOf": [
+    {
+      "$ref": "../../common/v0/envelope.json"
+    },
+    {
+      "required": ["payload"],
+      "properties": {
+        "type": {
+          "const": "signalling.error"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "enum": [
+                "INVALID_MESSAGE",
+                "UNSUPPORTED_VERSION",
+                "VALIDATION_FAILED",
+                "INVALID_PAYLOAD",
+                "UNSUPPORTED_MESSAGE_TYPE",
+                "CONNECTION_FAILED",
+                "UNAUTHORIZED",
+                "FORBIDDEN",
+                "TIMEOUT",
+                "CAPABILITY_MISMATCH",
+                "ICE_FAILED",
+                "SDP_INVALID",
+                "INTERNAL_ERROR"
+              ],
+              "description": "Signalling error code"
+            },
+            "message": {
+              "type": "string",
+              "description": "Human-readable error message"
+            },
+            "details": {
+              "type": "object",
+              "description": "Additional error context",
+              "additionalProperties": true
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}
