@@ -1,0 +1,18 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/agent/v0/ping.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AgentPingMessage",
+  "description": "Request to agent to respond with pong (v0.x)",
+  "allOf": [
+    {
+      "$ref": "../../common/v0/envelope.json"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "agent.ping"
+        }
+      }
+    }
+  ]
+}

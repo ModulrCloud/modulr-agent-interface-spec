@@ -1,0 +1,53 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/agent/v0/error.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AgentErrorMessage",
+  "description": "Agent error message (v0.x)",
+  "allOf": [
+    {
+      "$ref": "../../common/v0/envelope.json"
+    },
+    {
+      "required": ["payload"],
+      "properties": {
+        "type": {
+          "const": "agent.error"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "enum": [
+                "INVALID_MESSAGE",
+                "UNSUPPORTED_VERSION",
+                "VALIDATION_FAILED",
+                "INVALID_PAYLOAD",
+                "UNSUPPORTED_MESSAGE_TYPE",
+                "MOVEMENT_FAILED",
+                "AGENT_UNAVAILABLE",
+                "CAPABILITY_MISMATCH",
+                "INTERNAL_ERROR"
+              ],
+              "description": "Agent error code"
+            },
+            "message": {
+              "type": "string",
+              "description": "Human-readable error message"
+            },
+            "details": {
+              "type": "object",
+              "description": "Additional error context",
+              "additionalProperties": true
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}

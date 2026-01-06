@@ -1,0 +1,97 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/index.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent Protocol Schema Index",
+  "description": "Canonical index of all JSON Schema definitions for the agent communication protocol.",
+  "type": "object",
+
+  "properties": {
+    "protocol": {
+      "type": "string",
+      "const": "agent-protocol"
+    },
+    "supportedMajorVersions": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "description": "List of supported protocol major versions."
+    },
+    "schemas": {
+      "type": "object",
+      "description": "Map of public message schemas by domain and version.",
+      "properties": {
+        "signalling": {
+          "type": "object",
+          "properties": {
+            "v0": {
+              "type": "object",
+              "properties": {
+                "answer": {
+                    "$ref": "./signalling/v0/answer.json"
+                },
+                "capabilities": {
+                    "$ref": "./signalling/v0/capabilities.json"
+                },
+                "connected": {
+                  "$ref": "./signalling/v0/connected.json"
+                },
+                "disconnected": {
+                  "$ref": "./signalling/v0/disconnected.json"
+                },
+                "error": {
+                  "$ref": "./signalling/v0/error.json"
+                },
+                "ice_candidate": {
+                    "$ref": "./signalling/v0/ice_candidate.json"
+                },
+                "offer": {
+                  "$ref": "./signalling/v0/offer.json"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "agent": {
+          "type": "object",
+          "properties": {
+            "v0": {
+              "type": "object",
+              "properties": {
+                "capabilities": {
+                    "$ref": "./agent/v0/capabilities.json"
+                },
+                "error": {
+                  "$ref": "./agent/v0/error.json"
+                },
+                "movement": {
+                  "$ref": "./agent/v0/movement.json"
+                },
+                "ping": {
+                  "$ref": "./agent/v0/ping.json"
+                },
+                "pong": {
+                  "$ref": "./agent/v0/pong.json"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+
+  "required": [
+    "protocol",
+    "supportedMajorVersions",
+    "schemas"
+  ],
+
+  "additionalProperties": false
+}

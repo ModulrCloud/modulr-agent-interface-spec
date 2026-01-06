@@ -1,0 +1,43 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/signalling/v0/answer.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SignallingAnswerMessage",
+  "description": "WebRTC SDP answer sent during signalling (v0.x)",
+  "allOf": [
+    {
+      "$ref": "../../common/v0/envelope.json"
+    },
+    {
+      "required": ["payload"],
+      "properties": {
+        "type": {
+          "const": "signalling.answer"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "connectionId",
+            "sdp",
+            "sdpType"
+          ],
+          "properties": {
+            "connectionId": {
+                "type": "string",
+                "description": "Unique identifier used for this session."
+            },
+            "sdpType": {
+              "type": "string",
+              "const": "answer",
+              "description": "SDP type; must be 'answer'"
+            },
+            "sdp": {
+              "type": "string",
+              "description": "Session Description Protocol (SDP) answer"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}

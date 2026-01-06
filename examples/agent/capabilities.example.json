@@ -1,0 +1,12 @@
+{
+  "type": "agent.capabilities",
+  "version": "0.0",
+  "id": "f0a1b2c3-4d5e-6f7a-8b9c-0d1e2f3a4b5c",
+  "timestamp": "2026-01-05T14:45:00Z",
+  "payload": {
+    "versions": ["0.0", "0.1"]
+  },
+  "meta": {
+    "source": "agent-service"
+  }
+}

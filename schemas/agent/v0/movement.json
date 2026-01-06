@@ -1,0 +1,41 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/agent/v0/movement.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AgentMovementMessage",
+  "description": "Agent movement command specifying forward and turn velocities (v0.x)",
+  "allOf": [
+    {
+      "$ref": "../../common/v0/envelope.json"
+    },
+    {
+      "required": ["payload"],
+      "properties": {
+        "type": {
+          "const": "agent.movement"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "forward",
+            "turn"
+          ],
+          "properties": {
+            "forward": {
+              "type": "number",
+              "minimum": -1.0,
+              "maximum": 1.0,
+              "description": "Forward velocity (f64), range -1.0 to 1.0"
+            },
+            "turn": {
+              "type": "number",
+              "minimum": -1.0,
+              "maximum": 1.0,
+              "description": "Turn velocity (f64), range -1.0 to 1.0"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}

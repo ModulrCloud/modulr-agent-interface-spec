@@ -1,0 +1,52 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/signalling/v0/ice_candidate.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SignallingIceCandidateMessage",
+  "description": "ICE candidate for WebRTC connection establishment (v0.x)",
+  "allOf": [
+    {
+      "$ref": "../../common/v0/envelope.json"
+    },
+    {
+      "required": ["payload"],
+      "properties": {
+        "type": {
+          "const": "signalling.ice_candidate"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "connectionId",
+            "candidate",
+            "sdpMid",
+            "sdpMLineIndex"
+          ],
+          "properties": {
+            "candidate": {
+              "type": "string",
+              "description": "ICE candidate string"
+            },
+            "connectionId": {
+                "type": "string",
+                "description": "Unique identifier used for this session."
+            },
+            "sdpMid": {
+              "type": "string",
+              "description": "Media stream identification tag"
+            },
+            "sdpMLineIndex": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Index of the media description in the SDP"
+            },
+            "usernameFragment": {
+              "type": "string",
+              "description": "ICE username fragment"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}

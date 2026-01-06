@@ -1,0 +1,48 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/common/v0/envelope.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProtocolEnvelope",
+  "description": "Common envelope for all protocol messages (v0.x)",
+  "type": "object",
+  "required": [
+    "type",
+    "version",
+    "id",
+    "timestamp"
+  ],
+  "comment": "payload is optional - specific message schemas should require it if needed",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "Fully-qualified message type identifier (e.g. signalling.offer)"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$",
+      "description": "Semantic protocol version (MAJOR.MINOR)"
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique message identifier for correlation and tracing"
+    },
+    "correlationId": {
+      "type": "string",
+      "description": "Optional ID used to correlate request/response pairs"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "RFC 3339 timestamp indicating when the message was created"
+    },
+    "payload": {
+      "type": "object",
+      "description": "Message-specific payload"
+    },
+    "meta": {
+      "type": "object",
+      "description": "Optional metadata not relevant to protocol semantics",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

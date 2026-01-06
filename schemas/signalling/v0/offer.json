@@ -1,0 +1,47 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/signalling/v0/offer.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SignallingOfferMessage",
+  "description": "WebRTC SDP offer sent during signalling (v0.x)",
+  "allOf": [
+    {
+      "$ref": "../../common/v0/envelope.json"
+    },
+    {
+      "required": ["payload"],
+      "properties": {
+        "type": {
+          "const": "signalling.offer"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "connectionId",
+            "sdp",
+            "sdpType"
+          ],
+          "properties": {
+            "connectionId": {
+                "type": "string",
+                "description": "Unique identifier used for this session."
+            },
+            "sdpType": {
+              "type": "string",
+              "const": "offer",
+              "description": "SDP type; must be 'offer'"
+            },
+            "sdp": {
+              "type": "string",
+              "description": "Session Description Protocol (SDP) offer"
+            },
+            "iceRestart": {
+              "type": "boolean",
+              "description": "Indicates whether this offer is part of an ICE restart"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}
