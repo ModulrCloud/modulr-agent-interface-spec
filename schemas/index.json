@@ -48,6 +48,9 @@
                 },
                 "offer": {
                   "$ref": "./signalling/v0/offer.json"
+                },
+                "register": {
+                  "$ref": "./signalling/v0/register.json"
                 }
               },
               "additionalProperties": false
