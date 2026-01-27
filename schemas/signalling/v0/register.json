@@ -1,0 +1,53 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/signalling/v0/register.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Signalling Register Message",
+  "description": "Sent by the robot to register its availability with the signalling server (v0.x).",
+  "type": "object",
+
+  "allOf": [
+    {
+      "$ref": "../../common/v0/envelope.json"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "signalling.register"
+        },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "agentId": {
+              "type": "string",
+              "description": "Unique identifier for the robot/agent."
+            },
+            "capabilities": {
+              "type": "object",
+              "description": "Robot capabilities for session negotiation.",
+              "properties": {
+                "videoCodecs": {
+                  "type": "array",
+                  "items": { "type": "string" },
+                  "description": "Supported video codecs."
+                },
+                "audioCodecs": {
+                  "type": "array",
+                  "items": { "type": "string" },
+                  "description": "Supported audio codecs."
+                }
+              },
+              "additionalProperties": false
+            },
+            "metadata": {
+              "type": "object",
+              "description": "Optional metadata about the robot (model, firmware version, etc.)."
+            }
+          },
+          "required": ["agentId"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["payload"]
+    }
+  ]
+}

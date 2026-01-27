@@ -110,13 +110,39 @@ Declares supported protocol versions.
 
 The correct protocol for signalling is as follows:
 
-- Web client sends `signalling.offer` message to signalling server with a generated session ID. This ID is used by all parties for the session for the rest of the protocol.
-- The server validates the web client's permissions, and if valid, forwards the offer to the agent service.
-- The agent service sends a `signalling.answer` including the ID of the offer and further details of the connection to the signalling server. The server forwards this to the offering web client.
-- Both the agent service and web client offer ICE candidates, forwarded through the server, and all using the same session ID.
-- If both the web client and the agent service agree on a candidate to use, they complete the connection, then send a connection message to the signalling server to notify it that a successful connection has been made.
-- If either side disconnects, the other side will send a disconnection message with a reason to the signalling server.
-- Direct communication between the web client and agent service then continues using `agent` messages.
+1. Robot sends `signalling.register` message to the signalling server to register its availability.
+2. Server registers the robot and maintains its availability status.
+3. Client wants to connect to a robot. Client sends `signalling.offer` with a generated session ID to the signalling server.
+4. Server validates the client's permissions and forwards the offer to the robot.
+5. Robot receives the offer and sends `signalling.answer` back through the server to the client.
+6. Both sides exchange `signalling.ice_candidate` messages through the server until a valid connection can be achieved.
+7. Both sides send `signalling.connected` messages to the server, then proceed to exchange control and media messages directly.
+8. Once the connection drops, both sides send `signalling.disconnected` messages to the server.
+
+#### signalling.register
+Sent by the robot to register its availability with the signalling server.
+
+```json
+{
+  "type": "signalling.register",
+  "version": "0.0",
+  "payload": {
+    "agentId": "robot-001",
+    "capabilities": {
+      "videoCodecs": ["H264", "VP8"],
+      "audioCodecs": ["opus"]
+    },
+    "metadata": {
+      "model": "MR-5000",
+      "firmwareVersion": "2.1.0"
+    }
+  }
+}
+```
+
+- `agentId`: Unique identifier for the robot
+- `capabilities`: Optional capabilities for session negotiation
+- `metadata`: Optional metadata about the robot (model, firmware version, etc.)
 
 #### signalling.offer
 WebRTC SDP offer for connection establishment.
@@ -165,7 +191,7 @@ Indicates that a WebRTC connection has been lost or closed.
 ```
 
 - `connectionId`: Unique identifier for the connection that was lost
-- `reason`: Reason for disconnection (closed, failed, disconnected, timeout)
+- `reason`: Reason for disconnection (closed, failed, timeout)
 - `iceConnectionState`: Optional ICE connection state at time of disconnection
 - `details`: Optional additional details about the disconnection
 

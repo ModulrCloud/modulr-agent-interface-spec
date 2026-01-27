@@ -5,7 +5,7 @@ All notable changes to the Modulr Agent Interface Specification will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.0] - 2026-01-05
+## [0.0] - 2026-01-27
 
 ### Added
 
@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `agent.capabilities` - Protocol version negotiation with versions array
 
 #### Signalling Schemas#
+- `signalling.register` - Robot registration message to the signalling server
 - `signalling.error` - Error description if any error occurs during signalling protocol
 - `signalling.offer` - WebRTC SDP offer with ID, sdp and sdpType fields
 - `signalling.answer` - WebRTC SDP answer with ID, sdp and sdpType fields
