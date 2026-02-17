@@ -51,7 +51,7 @@ All protocol messages share a common envelope:
 ```json
 {
   "type": "category.message",
-  "version": "0.0",
+  "version": "0.1",
   "id": "unique-message-id",
   "timestamp": "2026-01-05T14:35:22Z",
   "payload": { },
@@ -77,7 +77,7 @@ Controls agent movement with forward and turn velocities.
 ```json
 {
   "type": "agent.movement",
-  "version": "0.0",
+  "version": "0.1",
   "payload": {
     "forward": 1.0,
     "turn": -0.3
@@ -99,9 +99,152 @@ Declares supported protocol versions.
 ```json
 {
   "type": "agent.capabilities",
-  "version": "0.0",
+  "version": "0.1",
   "payload": {
     "versions": ["0.0", "0.1"]
+  }
+}
+```
+
+#### agent.location.* (CRUD Operations)
+
+**Available in:** v0.1+
+
+The location messages enable the webapp to manage named locations on the robot. Locations are identified by their unique name. Each location represents a saved position with optional orientation.
+
+**Commands (webapp → robot):**
+
+##### agent.location.create
+Create a new location with a unique name.
+
+```json
+{
+  "type": "agent.location.create",
+  "version": "0.1",
+  "payload": {
+    "name": "Warehouse Loading Dock",
+    "position": {
+      "x": 12.5,
+      "y": 8.3,
+      "z": 0.0
+    },
+    "orientation": {
+      "yaw": 1.57
+    },
+    "metadata": {
+      "zone": "loading"
+    }
+  }
+}
+```
+
+All fields match the shared location definition:
+- `name`: Unique name of the location (required)
+- `position`: Coordinates (x, y required; z optional)
+- `orientation`: Optional orientation (yaw, pitch, roll in radians)
+- `metadata`: Optional metadata object
+
+##### agent.location.list
+List all stored locations on the robot.
+
+```json
+{
+  "type": "agent.location.list",
+  "version": "0.1",
+  "payload": {}
+}
+```
+
+Returns all locations with their full data.
+
+##### agent.location.update
+Overwrite an existing location by name.
+
+```json
+{
+  "type": "agent.location.update",
+  "version": "0.1",
+  "payload": {
+    "name": "Warehouse Loading Dock",
+    "position": {
+      "x": 12.8,
+      "y": 8.5
+    }
+  }
+}
+```
+
+The location name identifies which location to update. All fields must be provided to completely overwrite the location.
+
+##### agent.location.delete
+Delete a location by name.
+
+```json
+{
+  "type": "agent.location.delete",
+  "version": "0.1",
+  "payload": {
+    "name": "Old Warehouse Location"
+  }
+}
+```
+
+**Response (robot → webapp):**
+
+##### agent.location.response
+Success response for location operations.
+
+```json
+{
+  "type": "agent.location.response",
+  "version": "0.1",
+  "correlationId": "original-request-id",
+  "payload": {
+    "operation": "list",
+    "locations": [
+      {
+        "name": "Warehouse Loading Dock",
+        "position": {
+          "x": 12.5,
+          "y": 8.3,
+          "z": 0.0
+        },
+        "orientation": {
+          "yaw": 1.57
+        }
+      },
+      {
+        "name": "Assembly Station 1",
+        "position": {
+          "x": 5.2,
+          "y": 10.8
+        }
+      }
+    ]
+  }
+}
+```
+
+- `operation`: The operation performed (create, list, update, delete)
+- `locations`: Array of all locations (for list operation)
+
+If locations are not specified, the message signifies that the operation completed successfully. If there is an error, the `agent.error` message is returned instead.
+
+##### agent.error (for location errors)
+On failure, robot sends `agent.error` with `correlationId` matching the request.
+
+```json
+{
+  "type": "agent.error",
+  "version": "0.1",
+  "correlationId": "original-request-id",
+  "payload": {
+    "code": "LOCATION_NOT_FOUND",
+    "message": "Location 'Warehouse A' does not exist",
+    "details": {
+      "operation": "update",
+      "requestedName": "Warehouse A"
+    }
   }
 }
 ```
@@ -125,7 +268,7 @@ Sent by the robot to register its availability with the signalling server.
 ```json
 {
   "type": "signalling.register",
-  "version": "0.0",
+  "version": "0.1",
   "payload": {
     "agentId": "robot-001",
     "capabilities": {
@@ -159,7 +302,7 @@ Indicates that a WebRTC connection has been successfully established.
 ```json
 {
   "type": "signalling.connected",
-  "version": "0.0",
+  "version": "0.1",
   "payload": {
     "connectionId": "conn-9876543210",
     "iceConnectionState": "connected",
@@ -178,7 +321,7 @@ Indicates that a WebRTC connection has been lost or closed.
 ```json
 {
   "type": "signalling.disconnected",
-  "version": "0.0",
+  "version": "0.1",
   "payload": {
     "connectionId": "conn-9876543210",
     "reason": "timeout",
@@ -209,7 +352,7 @@ Agent-related errors with agent-specific error codes.
 ```json
 {
   "type": "agent.error",
-  "version": "0.0",
+  "version": "0.1",
   "payload": {
     "code": "MOVEMENT_FAILED",
     "message": "Agent movement command failed: obstacle detected",
@@ -231,6 +374,9 @@ Agent-related errors with agent-specific error codes.
 | `INVALID_PAYLOAD` | Payload doesn't match message schema |
 | `UNSUPPORTED_MESSAGE_TYPE` | Unknown message type |
 | `MOVEMENT_FAILED` | Movement command failed (obstacle, limit, hardware) |
+| `LOCATION_NOT_FOUND` | Requested location does not exist |
+| `LOCATION_ALREADY_EXISTS` | Location with that name already exists |
+| `LOCATION_NAME_INVALID` | Location name contains invalid characters |
 | `AGENT_UNAVAILABLE` | Agent is offline or unreachable |
 | `CAPABILITY_MISMATCH` | Incompatible protocol versions |
 | `INTERNAL_ERROR` | Unexpected agent error |
@@ -242,7 +388,7 @@ Signalling and WebRTC connection errors.
 ```json
 {
   "type": "signalling.error",
-  "version": "0.0",
+  "version": "0.1",
   "payload": {
     "code": "CONNECTION_FAILED",
     "message": "WebRTC connection failed to establish",

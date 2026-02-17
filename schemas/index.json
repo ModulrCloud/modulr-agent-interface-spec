@@ -70,6 +70,21 @@
                 "error": {
                   "$ref": "./agent/v0/error.json"
                 },
+                "location.create": {
+                  "$ref": "./agent/v0/location/create.json"
+                },
+                "location.delete": {
+                  "$ref": "./agent/v0/location/delete.json"
+                },
+                "location.list": {
+                  "$ref": "./agent/v0/location/list.json"
+                },
+                "location.response": {
+                  "$ref": "./agent/v0/location/response.json"
+                },
+                "location.update": {
+                  "$ref": "./agent/v0/location/update.json"
+                },
                 "movement": {
                   "$ref": "./agent/v0/movement.json"
                 },

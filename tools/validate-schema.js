@@ -74,11 +74,16 @@ async function validateExamples() {
       }
 
       // Map message type to schema URL
-      const [category, messageName] = example.type.split('.');
+      const typeParts = example.type.split('.');
+      const category = typeParts[0];
+      const messageName = typeParts.slice(1).join('.');
       const version = example.version;
       const majorVersion = 'v' + version.split('.')[0];
 
-      const schemaId = `https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/${category}/${majorVersion}/${messageName}.json`;
+      // Convert dots in message name to slashes for nested paths
+      const messageNamePath = messageName.replace(/\./g, '/');
+
+      const schemaId = `https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/${category}/${majorVersion}/${messageNamePath}.json`;
 
       // Get the compiled schema
       const validate = ajv.getSchema(schemaId);
@@ -169,12 +174,15 @@ async function checkExampleCoverage() {
 
       // Extract message type from schema
       // Expected format: https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/{category}/{version}/{messageName}.json
-      const idMatch = schema.$id.match(/schemas\/([^\/]+)\/(v\d+)\/([^\/]+)\.json$/);
+      // messageName can have slashes for nested messages (e.g., location/create)
+      const idMatch = schema.$id.match(/schemas\/([^\/]+)\/(v\d+)\/(.+)\.json$/);
       if (!idMatch) {
         continue;
       }
 
-      const [, category, version, messageName] = idMatch;
+      const [, category, version, messageNamePath] = idMatch;
+      // Convert slashes back to dots for message type
+      const messageName = messageNamePath.replace(/\//g, '.');
       const messageType = `${category}.${messageName}`;
       const majorVersion = version.replace('v', '');
       const key = `${messageType}:${majorVersion}`;
@@ -221,7 +229,7 @@ async function checkSemanticVersioning() {
       }
 
       // Extract version from schema $id
-      const idMatch = schema.$id.match(/schemas\/[^\/]+\/(v\d+)\/[^\/]+\.json$/);
+      const idMatch = schema.$id.match(/schemas\/[^\/]+\/(v\d+)\/.+\.json$/);
       if (!idMatch) {
         // Not a versioned schema, skip
         continue;
@@ -308,9 +316,12 @@ async function checkIndexFile() {
         }
 
         // Extract category, version, and message name from schema $id
-        const idMatch = schema.$id.match(/schemas\/([^\/]+)\/(v\d+)\/([^\/]+)\.json$/);
+        // messageName can have slashes for nested messages (e.g., location/create)
+        const idMatch = schema.$id.match(/schemas\/([^\/]+)\/(v\d+)\/(.+)\.json$/);
         if (idMatch) {
-          const [, category, version, messageName] = idMatch;
+          const [, category, version, messageNamePath] = idMatch;
+          // Convert slashes to dots for message name
+          const messageName = messageNamePath.replace(/\//g, '.');
 
           if (!messageSchemas.has(category)) {
             messageSchemas.set(category, new Map());
@@ -378,8 +389,9 @@ async function checkIndexFile() {
 
         for (const message of messages) {
           if (!indexMessages.has(message)) {
+            const messageFilePath = message.replace(/\./g, '/');
             console.error(`✗ Message "${category}.${message}" (${version}) exists in schemas but not in index.json`);
-            console.error(`  Add "$ref": "./${category}/${version}/${message}.json" to properties.schemas.properties.${category}.properties.${version}.properties.${message}\n`);
+            console.error(`  Add "$ref": "./${category}/${version}/${messageFilePath}.json" to properties.schemas.properties.${category}.properties.${version}.properties.${message}\n`);
             hasErrors = true;
           } else {
             console.log(`✓ ${category}.${message} (${version}) is in index.json`);
@@ -392,7 +404,9 @@ async function checkIndexFile() {
     for (const [category, versionMap] of indexedMessages) {
       for (const [version, messages] of versionMap) {
         for (const message of messages) {
-          const schemaPath = `schemas/${category}/${version}/${message}.json`;
+          // Convert dots in message name to slashes for file path
+          const messageFilePath = message.replace(/\./g, '/');
+          const schemaPath = `schemas/${category}/${version}/${messageFilePath}.json`;
 
           if (!fs.existsSync(schemaPath)) {
             console.error(`✗ index.json references ${category}.${message} (${version}) but schema not found at ${schemaPath}\n`);

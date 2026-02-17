@@ -1,0 +1,32 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/agent/v0/location/delete.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent Location Delete Command",
+  "description": "Command to delete a location from the robot by name (v0.1).",
+  "type": "object",
+
+  "allOf": [
+    {
+      "$ref": "../../../common/v0/envelope.json"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "agent.location.delete"
+        },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the location to delete."
+            }
+          },
+          "required": ["name"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["payload"]
+    }
+  ]
+}

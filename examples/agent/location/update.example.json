@@ -1,0 +1,22 @@
+{
+  "type": "agent.location.update",
+  "version": "0.1",
+  "id": "d4e5f6a7-b8c9-0d1e-2f3a-4b5c6d7e8f9a",
+  "timestamp": "2026-01-06T10:15:00Z",
+  "payload": {
+    "name": "Warehouse Loading Dock A",
+    "position": {
+      "x": 12.8,
+      "y": 8.5,
+      "z": 0.0
+    },
+    "orientation": {
+      "yaw": 1.60,
+      "pitch": 0.50,
+      "roll": 0.24
+    }
+  },
+  "meta": {
+    "source": "web-client"
+  }
+}
