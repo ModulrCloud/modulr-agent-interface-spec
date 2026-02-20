@@ -22,10 +22,6 @@
               "enum": ["create", "list", "update", "delete"],
               "description": "The operation that was performed."
             },
-            "location": {
-              "$ref": "../../../common/v0/location.json",
-              "description": "Single location data (for create, update operations)."
-            },
             "locations": {
               "type": "array",
               "description": "Array of all locations (for list operation).",
@@ -35,10 +31,18 @@
             }
           },
           "required": ["operation"],
-          "additionalProperties": false
+          "additionalProperties": false,
+          "if": {
+            "properties": {
+              "operation": { "const": "list" }
+            }
+          },
+          "then": {
+            "required": ["operation", "locations"]
+          }
         }
       },
-      "required": ["payload"]
+      "required": ["payload", "correlationId"]
     }
   ]
 }
