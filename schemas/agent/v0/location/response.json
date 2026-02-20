@@ -1,0 +1,48 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/agent/v0/location/response.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent Location Response",
+  "description": "Response from the robot for location operations (v0.1).",
+  "type": "object",
+
+  "allOf": [
+    {
+      "$ref": "../../../common/v0/envelope.json"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "agent.location.response"
+        },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "type": "string",
+              "enum": ["create", "list", "update", "delete"],
+              "description": "The operation that was performed."
+            },
+            "locations": {
+              "type": "array",
+              "description": "Array of all locations (for list operation).",
+              "items": {
+                "$ref": "../../../common/v0/location.json"
+              }
+            }
+          },
+          "required": ["operation"],
+          "additionalProperties": false,
+          "if": {
+            "properties": {
+              "operation": { "const": "list" }
+            }
+          },
+          "then": {
+            "required": ["operation", "locations"]
+          }
+        }
+      },
+      "required": ["payload", "correlationId"]
+    }
+  ]
+}

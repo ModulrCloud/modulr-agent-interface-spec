@@ -1,0 +1,25 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/agent/v0/location/list.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent Location List Command",
+  "description": "Command to list all locations stored on the robot (v0.1).",
+  "type": "object",
+
+  "allOf": [
+    {
+      "$ref": "../../../common/v0/envelope.json"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "agent.location.list"
+        },
+        "payload": {
+          "type": "object",
+          "additionalProperties": false
+        }
+      },
+      "required": ["payload"]
+    }
+  ]
+}

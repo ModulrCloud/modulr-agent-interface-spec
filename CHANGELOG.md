@@ -5,6 +5,26 @@ All notable changes to the Modulr Agent Interface Specification will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1] - 2026-02-17
+
+### Added
+
+#### Agent Schemas - Location CRUD Operations
+- `agent.location.create` - Create a new named location with position and optional orientation
+- `agent.location.list` - List all stored locations on the robot
+- `agent.location.update` - Update/overwrite an existing location by name
+- `agent.location.delete` - Delete a location by name
+- `agent.location.response` - Success response for location operations
+- Shared location definition schema (`common/v0/location.json`) with position, orientation, and metadata
+
+#### Error Codes
+- `LOCATION_NOT_FOUND` - Requested location does not exist
+- `LOCATION_ALREADY_EXISTS` - Location with that name already exists
+- `LOCATION_NAME_INVALID` - Location name contains invalid characters
+
+#### Infrastructure
+- Updated validation script to support nested message types with folder organization (e.g., `agent.location.create` → `agent/v0/location/create.json`)
+
 ## [0.0] - 2026-01-27
 
 ### Added

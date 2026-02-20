@@ -1,0 +1,19 @@
+{
+  "type": "agent.error",
+  "version": "0.1",
+  "id": "a9b8c7d6-e5f4-3210-9876-fedcba098765",
+  "correlationId": "d4e5f6a7-b8c9-0d1e-2f3a-4b5c6d7e8f9a",
+  "timestamp": "2026-01-06T10:15:05Z",
+  "payload": {
+    "code": "LOCATION_NOT_FOUND",
+    "message": "Location 'Warehouse Loading Dock A' does not exist",
+    "details": {
+      "operation": "update",
+      "requestedName": "Warehouse Loading Dock A"
+    }
+  },
+  "meta": {
+    "source": "robot",
+    "severity": "error"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/common/v0/location.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Location Definition",
+  "description": "Shared definition of a location (v0.1).",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Unique name of the location."
+    },
+    "position": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "number",
+          "description": "X coordinate."
+        },
+        "y": {
+          "type": "number",
+          "description": "Y coordinate."
+        },
+        "z": {
+          "type": "number",
+          "description": "Z coordinate (optional for 2D)."
+        }
+      },
+      "required": ["x", "y"],
+      "additionalProperties": false
+    },
+    "orientation": {
+      "type": "object",
+      "description": "Optional orientation at this location.",
+      "properties": {
+        "yaw": {
+          "type": "number",
+          "description": "Yaw angle in radians."
+        },
+        "pitch": {
+          "type": "number",
+          "description": "Pitch angle in radians."
+        },
+        "roll": {
+          "type": "number",
+          "description": "Roll angle in radians."
+        }
+      },
+      "additionalProperties": false
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Optional metadata for the location."
+    }
+  },
+  "required": ["name", "position"],
+  "additionalProperties": false
+}

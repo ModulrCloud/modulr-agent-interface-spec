@@ -1,0 +1,24 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/agent/v0/location/update.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent Location Update Command",
+  "description": "Command to update/overwrite an existing location on the robot by name (v0.1).",
+  "type": "object",
+
+  "allOf": [
+    {
+      "$ref": "../../../common/v0/envelope.json"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "agent.location.update"
+        },
+        "payload": {
+          "$ref": "../../../common/v0/location.json"
+        }
+      },
+      "required": ["payload"]
+    }
+  ]
+}
