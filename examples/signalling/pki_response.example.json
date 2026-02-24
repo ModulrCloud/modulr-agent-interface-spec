@@ -1,0 +1,10 @@
+{
+  "type": "signalling.pki_response",
+  "version": "0.3",
+  "id": "c6d8e0f2-a4b6-7c8d-9e0f-1a2b3c4d5e70",
+  "correlationId": "c6d8e0f2-a4b6-7c8d-9e0f-1a2b3c4d5e6f",
+  "timestamp": "2026-01-06T12:00:02Z",
+  "payload": {
+    "signature": "base64encodedsignatureofchallenge=="
+  }
+}

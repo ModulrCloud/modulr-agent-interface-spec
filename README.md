@@ -255,12 +255,13 @@ The correct protocol for signalling is as follows:
 
 1. Robot sends `signalling.register` message to the signalling server to register its availability.
 2. Server registers the robot and maintains its availability status.
-3. Client wants to connect to a robot. Client sends `signalling.offer` with a generated session ID to the signalling server.
-4. Server validates the client's permissions and forwards the offer to the robot.
-5. Robot receives the offer and sends `signalling.answer` back through the server to the client.
-6. Both sides exchange `signalling.ice_candidate` messages through the server until a valid connection can be achieved.
-7. Both sides send `signalling.connected` messages to the server, then proceed to exchange control and media messages directly.
-8. Once the connection drops, both sides send `signalling.disconnected` messages to the server.
+3. Server may send a `signalling.pki_challenge` to verify the robot's identity. The robot must respond with a `signalling.pki_response` containing the signed challenge. Registration is not considered complete until the challenge is satisfied.
+4. Client wants to connect to a robot. Client sends `signalling.offer` with a generated session ID to the signalling server.
+5. Server validates the client's permissions and forwards the offer to the robot.
+6. Robot receives the offer and sends `signalling.answer` back through the server to the client.
+7. Both sides exchange `signalling.ice_candidate` messages through the server until a valid connection can be achieved.
+8. Both sides send `signalling.connected` messages to the server, then proceed to exchange control and media messages directly.
+9. Once the connection drops, both sides send `signalling.disconnected` messages to the server.
 
 #### signalling.register
 Sent by the robot to register its availability with the signalling server.
@@ -356,6 +357,25 @@ Health check messages for the signalling server connection. Either side can send
 }
 ```
 
+#### signalling.pki_challenge / signalling.pki_response
+
+**Available in:** v0.3+
+
+After a robot sends `signalling.register`, the server may issue a `signalling.pki_challenge` to verify the robot's identity. The robot must sign the challenge using the specified algorithm and reply with a `signalling.pki_response`. Registration is not considered complete until a valid response is received.
+
+```json
+{
+  "type": "signalling.pki_challenge",
+  "version": "0.3",
+  "id": "c6d8e0f2-a4b6-7c8d-9e0f-1a2b3c4d5e6f",
+  "timestamp": "2026-01-06T12:00:01Z",
+  "payload": {
+    "challenge": "3q2+7w==base64encodedchallengestring==",
+    "challengeType": "RS256"
+  }
+}
+```
+
 ```json
 {
   "type": "signalling.pong",
@@ -364,6 +384,20 @@ Health check messages for the signalling server connection. Either side can send
   "correlationId": "b5c7d9e1-f3a5-6b7c-8d9e-0f1a2b3c4d5e",
   "timestamp": "2026-01-06T12:00:01Z"
 }
+  "type": "signalling.pki_response",
+  "version": "0.3",
+  "id": "c6d8e0f2-a4b6-7c8d-9e0f-1a2b3c4d5e70",
+  "correlationId": "c6d8e0f2-a4b6-7c8d-9e0f-1a2b3c4d5e6f",
+  "timestamp": "2026-01-06T12:00:02Z",
+  "payload": {
+    "signature": "base64encodedsignatureofchallenge=="
+  }
+}
+```
+
+- `challenge`: The challenge string the robot must sign
+- `challengeType`: The signing algorithm to use (e.g. `RS256`, `ES256`)
+- `signature`: The robot's cryptographic signature of the challenge
 
 ### Error Messages
 
