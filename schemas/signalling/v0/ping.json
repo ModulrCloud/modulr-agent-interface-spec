@@ -1,0 +1,18 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/signalling/v0/ping.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SignallingPingMessage",
+  "description": "Health check request sent to the signalling server (v0.2)",
+  "allOf": [
+    {
+      "$ref": "../../common/v0/envelope.json"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "signalling.ping"
+        }
+      }
+    }
+  ]
+}

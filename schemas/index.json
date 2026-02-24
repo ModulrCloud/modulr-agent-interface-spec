@@ -49,6 +49,12 @@
                 "offer": {
                   "$ref": "./signalling/v0/offer.json"
                 },
+                "ping": {
+                  "$ref": "./signalling/v0/ping.json"
+                },
+                "pong": {
+                  "$ref": "./signalling/v0/pong.json"
+                },
                 "register": {
                   "$ref": "./signalling/v0/register.json"
                 }

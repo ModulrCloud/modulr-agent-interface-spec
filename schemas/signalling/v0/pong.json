@@ -1,0 +1,19 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/signalling/v0/pong.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SignallingPongMessage",
+  "description": "Health check response from the signalling server (v0.2)",
+  "allOf": [
+    {
+      "$ref": "../../common/v0/envelope.json"
+    },
+    {
+      "required": ["correlationId"],
+      "properties": {
+        "type": {
+          "const": "signalling.pong"
+        }
+      }
+    }
+  ]
+}
