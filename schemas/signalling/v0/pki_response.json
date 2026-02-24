@@ -1,0 +1,30 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/signalling/v0/pki_response.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SignallingPKIResponseMessage",
+  "description": "Sent by the robot in response to a PKI challenge from the signalling server (v0.3)",
+  "allOf": [
+    {
+      "$ref": "../../common/v0/envelope.json"
+    },
+    {
+      "required": ["correlationId", "payload"],
+      "properties": {
+        "type": {
+          "const": "signalling.pki_response"
+        },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "signature": {
+              "type": "string",
+              "description": "The cryptographic signature of the challenge string."
+            }
+          },
+          "required": ["signature"],
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}

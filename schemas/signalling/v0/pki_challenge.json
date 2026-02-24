@@ -1,0 +1,30 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/signalling/v0/pki_challenge.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SignallingPKIChallengeMessage",
+  "description": "Sent by the signalling server to the robot after registration to verify identity (v0.3)",
+  "allOf": [
+    {
+      "$ref": "../../common/v0/envelope.json"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "signalling.pki_challenge"
+        },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "challenge": {
+              "type": "string",
+              "description": "The challenge string that the robot must sign."
+            }
+          },
+          "required": ["challenge"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["payload"]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/signalling/v0/pki_verified.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SignallingPKIVerifiedMessage",
+  "description": "Sent by the signalling server to confirm the robot's identity was successfully verified (v0.3)",
+  "allOf": [
+    {
+      "$ref": "../../common/v0/envelope.json"
+    },
+    {
+      "required": ["correlationId", "payload"],
+      "properties": {
+        "type": {
+          "const": "signalling.pki_verified"
+        },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "agentId": {
+              "type": "string",
+              "description": "The agent ID whose identity was verified."
+            }
+          },
+          "required": ["agentId"],
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}

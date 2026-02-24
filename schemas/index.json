@@ -55,6 +55,15 @@
                 "pong": {
                   "$ref": "./signalling/v0/pong.json"
                 },
+                "pki_challenge": {
+                  "$ref": "./signalling/v0/pki_challenge.json"
+                },
+                "pki_response": {
+                  "$ref": "./signalling/v0/pki_response.json"
+                },
+                "pki_verified": {
+                  "$ref": "./signalling/v0/pki_verified.json"
+                },
                 "register": {
                   "$ref": "./signalling/v0/register.json"
                 }
