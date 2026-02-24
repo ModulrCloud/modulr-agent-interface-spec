@@ -16,11 +16,16 @@
         "payload": {
           "type": "object",
           "required": [
+            "robotId",
             "connectionId",
             "sdp",
             "sdpType"
           ],
           "properties": {
+            "robotId": {
+              "type": "string",
+              "description": "Identifier of robot that this session is connecting to."
+            },
             "connectionId": {
                 "type": "string",
                 "description": "Unique identifier used for this session."
