@@ -1,7 +1,7 @@
 {
   "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/signalling/v0/pki_response.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "SignallingPkiResponseMessage",
+  "title": "SignallingPKIResponseMessage",
   "description": "Sent by the robot in response to a PKI challenge from the signalling server (v0.3)",
   "allOf": [
     {

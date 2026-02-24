@@ -10,11 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 #### Signalling Schemas - PKI Identity Verification
-- `signalling.pki_challenge` - Sent by the server after registration to verify robot identity; contains a `challenge` string and a `challengeType` indicating the signing algorithm
+- `signalling.pki_challenge` - Sent by the server after registration to verify robot identity; contains a `challenge` string the robot must sign
 - `signalling.pki_response` - Sent by the robot in reply to a PKI challenge; contains the `signature` of the challenge (requires `correlationId`)
+- `signalling.pki_verified` - Sent by the server to confirm successful verification; contains the `agentId` (requires `correlationId`)
 
 #### Protocol Flow
-- Documented optional PKI challenge/response handshake that may occur between `signalling.register` and the first `signalling.offer`
+- Documented optional PKI challenge/response/verified handshake that may occur between `signalling.register` and the first `signalling.offer`
 
 ## [0.2] - 2026-02-24
 
