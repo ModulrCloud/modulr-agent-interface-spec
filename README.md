@@ -9,7 +9,7 @@ The Modulr Agent Interface Specification defines a standardized protocol for com
 ### Message Categories
 
 - **Agent**: Commands and responses for agent control (movement, ping/pong, capabilities)
-- **Signalling**: WebRTC signalling messages (offer, answer, ICE candidates, capabilities)
+- **Signalling**: WebRTC signalling messages (offer, answer, ICE candidates, capabilities, ping/pong)
 - **Common**: Shared infrastructure schemas (envelope, error)
 
 ## Validation Steps
@@ -340,6 +340,30 @@ Indicates that a WebRTC connection has been lost or closed.
 
 #### signalling.capabilities
 Declares supported signalling protocol versions.
+
+#### signalling.ping / signalling.pong
+
+**Available in:** v0.2+
+
+Health check messages for the signalling server connection. Either side can send a `signalling.ping` to verify the signalling server is reachable. The server responds with a `signalling.pong`, referencing the ID of the original ping via `correlationId`.
+
+```json
+{
+  "type": "signalling.ping",
+  "version": "0.2",
+  "id": "b5c7d9e1-f3a5-6b7c-8d9e-0f1a2b3c4d5e",
+  "timestamp": "2026-01-06T12:00:00Z"
+}
+```
+
+```json
+{
+  "type": "signalling.pong",
+  "version": "0.2",
+  "id": "b5c7d9e1-f3a5-6b7c-8d9e-0f1a2b3c4d5f",
+  "correlationId": "b5c7d9e1-f3a5-6b7c-8d9e-0f1a2b3c4d5e",
+  "timestamp": "2026-01-06T12:00:01Z"
+}
 
 ### Error Messages
 

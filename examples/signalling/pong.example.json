@@ -1,0 +1,7 @@
+{
+  "type": "signalling.pong",
+  "version": "0.2",
+  "id": "b5c7d9e1-f3a5-6b7c-8d9e-0f1a2b3c4d5f",
+  "correlationId": "b5c7d9e1-f3a5-6b7c-8d9e-0f1a2b3c4d5e",
+  "timestamp": "2026-01-06T12:00:01Z"
+}
