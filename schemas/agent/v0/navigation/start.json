@@ -1,0 +1,26 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/agent/v0/navigation/start.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent Navigation Start Command",
+  "description": "Command to navigate the agent to a saved location by name.",
+  "allOf": [
+    { "$ref": "../../../common/v0/envelope.json" },
+    {
+      "properties": {
+        "type": { "const": "agent.navigation.start" },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the saved location to navigate to."
+            }
+          },
+          "required": ["name"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["payload"]
+    }
+  ]
+}

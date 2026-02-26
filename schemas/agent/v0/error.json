@@ -33,6 +33,7 @@
                 "LOCATION_ALREADY_EXISTS",
                 "LOCATION_STORAGE_FULL",
                 "LOCATION_NAME_INVALID",
+                "NAVIGATION_NOT_ACTIVE",
                 "AGENT_UNAVAILABLE",
                 "CAPABILITY_MISMATCH",
                 "INTERNAL_ERROR"
