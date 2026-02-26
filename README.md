@@ -263,7 +263,7 @@ Start navigating to a saved location.
 ```json
 {
   "type": "agent.navigation.start",
-  "version": "0.1",
+  "version": "0.4",
   "payload": {
     "name": "Warehouse Loading Dock"
   }
@@ -278,7 +278,7 @@ Cancel the current navigation.
 ```json
 {
   "type": "agent.navigation.cancel",
-  "version": "0.1",
+  "version": "0.4",
   "payload": {}
 }
 ```
@@ -293,7 +293,7 @@ Status update for a navigation operation.
 ```json
 {
   "type": "agent.navigation.response",
-  "version": "0.1",
+  "version": "0.4",
   "correlationId": "original-request-id",
   "payload": {
     "status": "started",

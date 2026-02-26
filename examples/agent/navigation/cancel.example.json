@@ -1,6 +1,6 @@
 {
   "type": "agent.navigation.cancel",
-  "version": "0.1",
+  "version": "0.4",
   "id": "e2f3a4b5-c6d7-8e9f-0a1b-2c3d4e5f6a7b",
   "timestamp": "2026-01-06T14:01:30Z",
   "payload": {},
