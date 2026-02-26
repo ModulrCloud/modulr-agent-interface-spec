@@ -100,6 +100,9 @@
                 "location.update": {
                   "$ref": "./agent/v0/location/update.json"
                 },
+                "movement": {
+                  "$ref": "./agent/v0/movement.json"
+                },
                 "navigation.cancel": {
                   "$ref": "./agent/v0/navigation/cancel.json"
                 },
@@ -108,9 +111,6 @@
                 },
                 "navigation.start": {
                   "$ref": "./agent/v0/navigation/start.json"
-                },
-                "movement": {
-                  "$ref": "./agent/v0/movement.json"
                 },
                 "ping": {
                   "$ref": "./agent/v0/ping.json"
