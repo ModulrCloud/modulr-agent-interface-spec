@@ -1,0 +1,35 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/agent/v0/navigation/response.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent Navigation Response",
+  "description": "Response indicating navigation status.",
+  "allOf": [
+    { "$ref": "../../../common/v0/envelope.json" },
+    {
+      "properties": {
+        "type": { "const": "agent.navigation.response" },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": ["started", "completed", "cancelled", "failed"],
+              "description": "Current navigation status."
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the location being navigated to."
+            },
+            "message": {
+              "type": "string",
+              "description": "Optional human-readable detail (e.g. failure reason)."
+            }
+          },
+          "required": ["status", "name"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["payload", "correlationId"]
+    }
+  ]
+}

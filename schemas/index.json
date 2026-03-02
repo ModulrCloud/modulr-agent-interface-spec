@@ -103,6 +103,15 @@
                 "movement": {
                   "$ref": "./agent/v0/movement.json"
                 },
+                "navigation.cancel": {
+                  "$ref": "./agent/v0/navigation/cancel.json"
+                },
+                "navigation.response": {
+                  "$ref": "./agent/v0/navigation/response.json"
+                },
+                "navigation.start": {
+                  "$ref": "./agent/v0/navigation/start.json"
+                },
                 "ping": {
                   "$ref": "./agent/v0/ping.json"
                 },

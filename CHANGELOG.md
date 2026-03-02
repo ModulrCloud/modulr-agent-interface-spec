@@ -5,6 +5,19 @@ All notable changes to the Modulr Agent Interface Specification will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4] - 2026-02-26
+
+### Added
+
+#### Agent Schemas - Navigation
+- `agent.navigation.start` - Command the robot to navigate to a saved location by name
+- `agent.navigation.cancel` - Cancel the robot's current navigation (empty payload)
+- `agent.navigation.response` - Navigation status response with `status` (started, completed, cancelled, failed), `name`, and optional `message` (requires `correlationId`)
+
+#### Error Codes
+- `NAVIGATION_ALREADY_ACTIVE` - Navigation is already in progress
+- `NAVIGATION_NOT_ACTIVE` - No navigation in progress to cancel
+
 ## [0.3] - 2026-02-24
 
 ### Added

@@ -1,0 +1,11 @@
+{
+  "type": "agent.navigation.response",
+  "version": "0.4",
+  "id": "f3a4b5c6-d7e8-9f0a-1b2c-3d4e5f6a7b8c",
+  "correlationId": "d1e2f3a4-b5c6-7d8e-9f0a-1b2c3d4e5f6a",
+  "timestamp": "2026-01-06T14:00:01Z",
+  "payload": {
+    "status": "started",
+    "name": "Warehouse Loading Dock"
+  }
+}

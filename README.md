@@ -249,6 +249,65 @@ On failure, robot sends `agent.error` with `correlationId` matching the request.
 }
 ```
 
+#### agent.navigation.* (Navigation)
+
+**Available in:** v0.4+
+
+The navigation messages enable the webapp to command the robot to navigate to a saved location by name. The robot reports status updates via a response message correlated to the original request.
+
+**Commands (webapp → robot):**
+
+##### agent.navigation.start
+Start navigating to a saved location.
+
+```json
+{
+  "type": "agent.navigation.start",
+  "version": "0.4",
+  "payload": {
+    "name": "Warehouse Loading Dock"
+  }
+}
+```
+
+- `name`: Name of the saved location to navigate to (required)
+
+##### agent.navigation.cancel
+Cancel the current navigation.
+
+```json
+{
+  "type": "agent.navigation.cancel",
+  "version": "0.4",
+  "payload": {}
+}
+```
+
+No payload fields — cancels whatever navigation is currently in progress.
+
+**Response (robot → webapp):**
+
+##### agent.navigation.response
+Status update for a navigation operation.
+
+```json
+{
+  "type": "agent.navigation.response",
+  "version": "0.4",
+  "correlationId": "original-request-id",
+  "payload": {
+    "status": "started",
+    "name": "Warehouse Loading Dock"
+  }
+}
+```
+
+- `status`: Navigation status — `started`, `completed`, `cancelled`, or `failed`
+- `name`: Name of the location being navigated to (required)
+- `message`: Optional human-readable detail (e.g. failure reason)
+
+If the robot is not currently navigating when a cancel is received, it returns `agent.error` with code `NAVIGATION_NOT_ACTIVE`.
+
 ### Signalling Messages
 
 The correct protocol for signalling is as follows:
@@ -447,6 +506,8 @@ Agent-related errors with agent-specific error codes.
 | `LOCATION_NOT_FOUND` | Requested location does not exist |
 | `LOCATION_ALREADY_EXISTS` | Location with that name already exists |
 | `LOCATION_NAME_INVALID` | Location name contains invalid characters |
+| `NAVIGATION_ALREADY_ACTIVE` | Navigation already in progress |
+| `NAVIGATION_NOT_ACTIVE` | No navigation in progress to cancel |
 | `AGENT_UNAVAILABLE` | Agent is offline or unreachable |
 | `CAPABILITY_MISMATCH` | Incompatible protocol versions |
 | `INTERNAL_ERROR` | Unexpected agent error |

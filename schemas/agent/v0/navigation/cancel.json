@@ -1,0 +1,19 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/agent/v0/navigation/cancel.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent Navigation Cancel Command",
+  "description": "Command to cancel the agent's current navigation.",
+  "allOf": [
+    { "$ref": "../../../common/v0/envelope.json" },
+    {
+      "properties": {
+        "type": { "const": "agent.navigation.cancel" },
+        "payload": {
+          "type": "object",
+          "additionalProperties": false
+        }
+      },
+      "required": ["payload"]
+    }
+  ]
+}
