@@ -1,0 +1,56 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/signalling/v0/welcome.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Signalling Welcome Message",
+  "description": "Sent by the signalling server after a client connects. Provides the connection ID and ICE server configuration (STUN + optional TURN credentials).",
+  "type": "object",
+
+  "allOf": [
+    {
+      "$ref": "../../common/v0/envelope.json"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "signalling.welcome"
+        },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "connectionId": {
+              "type": "string",
+              "description": "Unique identifier assigned to this connection by the signalling server."
+            },
+            "iceServers": {
+              "type": "array",
+              "description": "ICE server configuration to be used for WebRTC peer connection setup. Includes STUN and optionally TURN relay servers with short-lived credentials.",
+              "items": {
+                "type": "object",
+                "required": ["urls"],
+                "properties": {
+                  "urls": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "description": "One or more STUN/TURN URLs for this server."
+                  },
+                  "username": {
+                    "type": "string",
+                    "description": "Username for TURN authentication. Not required for STUN servers."
+                  },
+                  "credential": {
+                    "type": "string",
+                    "description": "Credential for TURN authentication. Not required for STUN servers."
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": ["connectionId"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["payload"]
+    }
+  ]
+}

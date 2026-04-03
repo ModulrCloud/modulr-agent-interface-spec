@@ -1,0 +1,26 @@
+{
+  "type": "signalling.welcome",
+  "version": "0.0",
+  "id": "f4e3d2c1-b0a9-8f7e-6d5c-4b3a2918e7f6",
+  "timestamp": "2026-01-05T15:09:55Z",
+  "payload": {
+    "connectionId": "b7c3c1a2-5f1e-4c44-9f42-91b9d65f4c2d",
+    "iceServers": [
+      {
+        "urls": ["stun:stun.cloudflare.com:3478"]
+      },
+      {
+        "urls": [
+          "turn:turn.cloudflare.com:3478?transport=udp",
+          "turn:turn.cloudflare.com:3478?transport=tcp",
+          "turns:turn.cloudflare.com:5349?transport=tcp"
+        ],
+        "username": "example-username",
+        "credential": "example-credential"
+      }
+    ]
+  },
+  "meta": {
+    "source": "signalling-service"
+  }
+}

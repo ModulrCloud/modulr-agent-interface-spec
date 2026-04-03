@@ -66,6 +66,9 @@
                 },
                 "register": {
                   "$ref": "./signalling/v0/register.json"
+                },
+                "welcome": {
+                  "$ref": "./signalling/v0/welcome.json"
                 }
               },
               "additionalProperties": false
