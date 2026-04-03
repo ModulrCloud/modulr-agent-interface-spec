@@ -12,7 +12,7 @@
     {
       "properties": {
         "type": {
-          "const": "agent.config.update.response"
+          "const": "agent.config.response"
         },
         "payload": {
           "type": "object",

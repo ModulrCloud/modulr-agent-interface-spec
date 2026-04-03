@@ -1,5 +1,5 @@
 {
-  "type": "agent.config.update.response",
+  "type": "agent.config.response",
   "version": "0.5",
   "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
   "correlationId": "req-9f8e7d6c-5b4a-3210-fedc-ba0987654321",
