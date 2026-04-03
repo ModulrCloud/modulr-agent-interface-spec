@@ -1,0 +1,14 @@
+{
+  "type": "agent.config.update",
+  "version": "0.5",
+  "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "correlationId": "req-9f8e7d6c-5b4a-3210-fedc-ba0987654321",
+  "timestamp": "2026-04-03T14:30:00Z",
+  "payload": {
+    "key": "image_format",
+    "value": "Jpeg"
+  },
+  "meta": {
+    "source": "web-client"
+  }
+}
