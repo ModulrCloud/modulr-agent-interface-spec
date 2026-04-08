@@ -39,8 +39,64 @@
       "keys": {}
     },
     "ros_topics": {
-      "description": "Controls which ROS topics are subscribed to for streaming and recording. Reserved for future use.",
-      "keys": {}
+      "description": "Controls which ROS topics the agent subscribes to or publishes on. Changes require an agent restart. Topic names must be valid ROS names: allowed characters are [a-zA-Z0-9_/{}~], max 256 characters, no spaces, no trailing slash, no double slashes, no segment starting with a digit.",
+      "validation": {
+        "pattern": "^[~/]?[a-zA-Z0-9_/{}~]+$",
+        "maxLength": 256,
+        "explicitRules": [
+          "No spaces or whitespace",
+          "No trailing slash",
+          "No consecutive slashes (//)",
+          "No consecutive underscores (__)",
+          "No path segment starting with a digit"
+        ]
+      },
+      "keys": {
+        "ros.camera_raw_topic": {
+          "type": "string",
+          "description": "ROS topic the agent subscribes to for raw (uncompressed) camera frames (sensor_msgs/Image). Used when image_format is Raw.",
+          "default": "/camera/image_raw",
+          "examples": ["/camera/image_raw", "/realsense/color/image_raw", "/usb_cam/image_raw"],
+          "restartRequired": true
+        },
+        "ros.camera_jpeg_topic": {
+          "type": "string",
+          "description": "ROS topic the agent subscribes to for JPEG-compressed camera frames (sensor_msgs/CompressedImage). Used when image_format is Jpeg.",
+          "default": "/camera/image_raw/compressed",
+          "examples": ["/camera/image_raw/compressed", "/realsense/color/image_raw/compressed", "/usb_cam/image_raw/compressed"],
+          "restartRequired": true
+        },
+        "ros.nav_status_topic": {
+          "type": "string",
+          "description": "ROS topic the agent subscribes to for navigation status feedback (std_msgs/String).",
+          "default": "/modulr/nav/status",
+          "restartRequired": true
+        },
+        "ros.cmd_vel_topic": {
+          "type": "string",
+          "description": "ROS topic the agent publishes movement commands to (geometry_msgs/Twist).",
+          "default": "/cmd_vel",
+          "restartRequired": true
+        },
+        "ros.nav_goal_topic": {
+          "type": "string",
+          "description": "ROS topic the agent publishes navigation goals to (geometry_msgs/PoseStamped).",
+          "default": "/modulr/nav/goal",
+          "restartRequired": true
+        },
+        "ros.nav_cancel_topic": {
+          "type": "string",
+          "description": "ROS topic the agent publishes navigation cancel signals to (std_msgs/Empty).",
+          "default": "/modulr/nav/cancel",
+          "restartRequired": true
+        },
+        "ros.nav_home_topic": {
+          "type": "string",
+          "description": "ROS topic the agent publishes home signals to (std_msgs/Empty).",
+          "default": "/modulr/nav/home",
+          "restartRequired": true
+        }
+      }
     }
   }
 }
