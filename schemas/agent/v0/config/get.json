@@ -1,0 +1,21 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/agent/v0/config/get.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent Config Get Command",
+  "description": "Request the agent's current configuration. The agent responds with agent.config.get.response containing all user-settable config keys. (v0.5)",
+  "type": "object",
+
+  "allOf": [
+    {
+      "$ref": "../../../common/v0/envelope.json"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "agent.config.get"
+        }
+      },
+      "required": ["correlationId"]
+    }
+  ]
+}

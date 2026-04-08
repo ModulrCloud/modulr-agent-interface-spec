@@ -82,6 +82,12 @@
                 "capabilities": {
                     "$ref": "./agent/v0/capabilities.json"
                 },
+                "config.get": {
+                  "$ref": "./agent/v0/config/get.json"
+                },
+                "config.get.response": {
+                  "$ref": "./agent/v0/config/get/response.json"
+                },
                 "config.response": {
                   "$ref": "./agent/v0/config/response.json"
                 },

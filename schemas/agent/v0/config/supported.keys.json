@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent Config Supported Keys",
+  "description": "Documents all keys accepted by agent.config.update and returned by agent.config.get.response. Grouped by feature area. This file is informational — per-value validation is performed by the agent, not the envelope schema.",
+
+  "categories": {
+    "video": {
+      "description": "Controls the robot's video stream pipeline. Changes require an agent restart to take effect.",
+      "keys": {
+        "image_format": {
+          "type": "string",
+          "description": "Output encoding format for video frames.",
+          "values": ["Jpeg", "Raw"],
+          "restartRequired": true
+        },
+        "resolution": {
+          "type": "string",
+          "description": "Output resolution as WIDTHxHEIGHT string. Sets both image_width and image_height in the agent config.",
+          "pattern": "^[0-9]+x[0-9]+$",
+          "examples": ["640x480", "1280x720", "1920x1080"],
+          "restartRequired": true
+        },
+        "video_source": {
+          "type": "string",
+          "description": "Source transport for camera frames.",
+          "values": ["Ros", "Zenoh"],
+          "restartRequired": true
+        },
+        "image_encoding": {
+          "type": "string",
+          "description": "Pixel encoding of raw frames from the camera source.",
+          "values": ["BGR", "RGB", "MONO8"],
+          "restartRequired": true
+        }
+      }
+    },
+    "recording": {
+      "description": "Controls MCAP data recording. Reserved for future use.",
+      "keys": {}
+    },
+    "ros_topics": {
+      "description": "Controls which ROS topics are subscribed to for streaming and recording. Reserved for future use.",
+      "keys": {}
+    }
+  }
+}

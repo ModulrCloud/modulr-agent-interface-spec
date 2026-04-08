@@ -1,0 +1,7 @@
+{
+  "type": "agent.config.get",
+  "version": "0.5",
+  "id": "d4e5f6a7-b8c9-0123-defa-234567890123",
+  "correlationId": "req-d4e5f6a7-b8c9-0123-defa-234567890123",
+  "timestamp": "2026-04-08T10:00:00Z"
+}
