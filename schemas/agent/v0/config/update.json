@@ -1,0 +1,36 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/agent/v0/config/update.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent Config Update Command",
+  "description": "Command to update a configuration parameter on the robot (v0.5).",
+  "type": "object",
+
+  "allOf": [
+    {
+      "$ref": "../../../common/v0/envelope.json"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "agent.config.update"
+        },
+        "payload": {
+          "type": "object",
+          "required": ["key", "value"],
+          "properties": {
+            "key": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Configuration parameter name (e.g. 'image_format', 'resolution')."
+            },
+            "value": {
+              "description": "Configuration value. Type depends on the key — validated by the agent handler, not the schema."
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": ["payload", "correlationId"]
+    }
+  ]
+}

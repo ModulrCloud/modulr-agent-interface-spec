@@ -1,0 +1,40 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/agent/v0/config/response.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent Config Update Response",
+  "description": "Response from the robot after a config update operation (v0.5).",
+  "type": "object",
+
+  "allOf": [
+    {
+      "$ref": "../../../common/v0/envelope.json"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "agent.config.response"
+        },
+        "payload": {
+          "type": "object",
+          "required": ["key", "applied", "restartRequired"],
+          "properties": {
+            "key": {
+              "type": "string",
+              "description": "The configuration key that was updated."
+            },
+            "applied": {
+              "type": "boolean",
+              "description": "Whether the configuration change was successfully applied and persisted."
+            },
+            "restartRequired": {
+              "type": "boolean",
+              "description": "Whether the agent will restart to apply the change. If true, expect a brief disconnection."
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": ["payload", "correlationId"]
+    }
+  ]
+}

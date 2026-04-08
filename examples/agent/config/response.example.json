@@ -1,0 +1,12 @@
+{
+  "type": "agent.config.response",
+  "version": "0.5",
+  "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+  "correlationId": "req-9f8e7d6c-5b4a-3210-fedc-ba0987654321",
+  "timestamp": "2026-04-03T14:30:01Z",
+  "payload": {
+    "key": "image_format",
+    "applied": true,
+    "restartRequired": true
+  }
+}

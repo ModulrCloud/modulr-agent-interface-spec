@@ -1,0 +1,15 @@
+{
+  "type": "agent.config.get.response",
+  "version": "0.5",
+  "id": "e5f6a7b8-c9d0-1234-efab-345678901234",
+  "correlationId": "req-d4e5f6a7-b8c9-0123-defa-234567890123",
+  "timestamp": "2026-04-08T10:00:00Z",
+  "payload": {
+    "config": {
+      "image_format": "Jpeg",
+      "resolution": "1280x720",
+      "video_source": "Ros",
+      "image_encoding": "BGR"
+    }
+  }
+}

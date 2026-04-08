@@ -5,6 +5,23 @@ All notable changes to the Modulr Agent Interface Specification will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5] - 2026-04-03
+
+### Added
+
+#### Agent Schemas - Config Update
+- `agent.config.update` - Command to update a configuration parameter on the robot with generic key/value payload (requires `correlationId`)
+- `agent.config.response` - Success response with `key`, `applied`, and `restartRequired` fields (requires `correlationId`)
+- Errors use existing `agent.error` schema with `VALIDATION_FAILED` for unknown keys/invalid values, `INVALID_PAYLOAD` for malformed requests, `INTERNAL_ERROR` for persistence failures
+
+#### Agent Schemas - Config Get
+- `agent.config.get` - Request the agent's current configuration (requires `correlationId`, no payload)
+- `agent.config.get.response` - Returns all user-settable config as a flat key-value map under `payload.config`; keys match those accepted by `agent.config.update`
+- Designed to be extensible: future feature areas (ROS topics, recording) add new keys to the same map without new message types
+
+#### Config Key Reference
+- `supported-keys.json` - Informational document listing all accepted `agent.config.update` keys grouped by feature area (`video`, `recording`, `ros_topics`), with valid values and `restartRequired` flag per key
+
 ## [0.4] - 2026-02-26
 
 ### Added

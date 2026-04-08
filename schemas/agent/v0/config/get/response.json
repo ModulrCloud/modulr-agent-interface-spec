@@ -1,0 +1,33 @@
+{
+  "$id": "https://github.com/ModulrCloud/modulr-agent-interface-spec/schemas/agent/v0/config/get/response.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent Config Get Response",
+  "description": "Response from the agent containing all current user-settable configuration as a flat key-value map. Keys match those accepted by agent.config.update. (v0.5)",
+  "type": "object",
+
+  "allOf": [
+    {
+      "$ref": "../../../../common/v0/envelope.json"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "agent.config.get.response"
+        },
+        "payload": {
+          "type": "object",
+          "required": ["config"],
+          "properties": {
+            "config": {
+              "type": "object",
+              "description": "Flat map of all user-settable config keys to their current values. Keys match those accepted by agent.config.update. Additional keys may appear as new features are added.",
+              "additionalProperties": true
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": ["payload", "correlationId"]
+    }
+  ]
+}
